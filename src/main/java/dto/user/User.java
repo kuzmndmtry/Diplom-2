@@ -1,4 +1,4 @@
-package dto.users;
+package dto.user;
 
 public class User {
     private String email;
