@@ -7,7 +7,6 @@ import dto.user.UserUpdateRequestBody;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +30,7 @@ public class PatchUserTest {
         userRegisterRequestBody = new UserRegisterRequestBody();
         userUpdateRequestBody = new UserUpdateRequestBody();
     }
+
     @After
     public void deleteTestCourier() {
         UserLoginResponseBody userLoginResponseBody =
@@ -40,12 +40,13 @@ public class PatchUserTest {
             userClient.delete(userLoginResponseBody.getAccessToken());
         }
         UserLoginResponseBody userLoginResponseBodyWihUpdateEmail =
-                userClient.login(userUpdateRequestBody.getEmail(),userRegisterRequestBody.getPassword())
+                userClient.login(userUpdateRequestBody.getEmail(), userRegisterRequestBody.getPassword())
                         .as(UserLoginResponseBody.class);
         if (userLoginResponseBodyWihUpdateEmail.getAccessToken() != null) {
             userClient.delete(userLoginResponseBodyWihUpdateEmail.getAccessToken());
         }
     }
+
     @Test
     @DisplayName("Сheck update user email")
     @Description("Сhecking the update user email")
@@ -63,6 +64,7 @@ public class PatchUserTest {
                 .toLowerCase(Locale.ROOT));
         stepsTest.compareResponseBody(response, "user.name", userRegisterRequestBody.getName());
     }
+
     @Test
     @DisplayName("Сheck update user name")
     @Description("Сhecking the update user name")
@@ -80,6 +82,7 @@ public class PatchUserTest {
                 .toLowerCase(Locale.ROOT));
         stepsTest.compareResponseBody(response, "user.name", userUpdateRequestBody.getName());
     }
+
     @Test
     @DisplayName("Сheck update user email without auth")
     @Description("Сhecking the update user email without auth")
@@ -92,6 +95,7 @@ public class PatchUserTest {
         stepsTest.compareResponseBody(response, "success", false);
         stepsTest.compareResponseBody(response, "message", "You should be authorised");
     }
+
     @Test
     @DisplayName("Сheck update user email without auth")
     @Description("Сhecking the update user email without auth")

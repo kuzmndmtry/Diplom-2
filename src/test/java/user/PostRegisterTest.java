@@ -65,6 +65,7 @@ public class PostRegisterTest {
         userRegisterRequestBody.setEmail(null);
         Response response =
                 userClient.create(userRegisterRequestBody);
+        stepsTest.compareResponseStatusCode(response, SC_FORBIDDEN);
         stepsTest.compareResponseBody(response, "success", false);
         stepsTest.compareResponseBody(response, "message", "Email, password and name are required fields");
     }
@@ -74,6 +75,7 @@ public class PostRegisterTest {
         userRegisterRequestBody.setPassword(null);
         Response response =
                 userClient.create(userRegisterRequestBody);
+        stepsTest.compareResponseStatusCode(response, SC_FORBIDDEN);
         stepsTest.compareResponseBody(response, "success", false);
         stepsTest.compareResponseBody(response, "message", "Email, password and name are required fields");
     }
@@ -84,6 +86,7 @@ public class PostRegisterTest {
         userRegisterRequestBody.setName(null);
         Response response =
                 userClient.create(userRegisterRequestBody);
+        stepsTest.compareResponseStatusCode(response, SC_FORBIDDEN);
         stepsTest.compareResponseBody(response, "success", false);
         stepsTest.compareResponseBody(response, "message", "Email, password and name are required fields");
     }
